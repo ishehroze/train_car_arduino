@@ -97,8 +97,10 @@ void loop()
   TrainDistance = getTrainDistance();
 
   if (TrainDistance < 5) {
+    // Need to include state-wise switch-case block
     raise_rail_bars(rail_bar_1, rail_bar_2);
   } else {
+    // Need to include state-wise switch-case block
     lower_rail_bars(rail_bar_1, rail_bar_2);
   }
 
