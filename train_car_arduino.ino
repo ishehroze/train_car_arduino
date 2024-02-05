@@ -17,6 +17,15 @@ const int RAIL_BAR_LOWER_ANGLE = 0;
 const int RACKER_RAISE_ANGLE = 75;
 const int RACKER_LOWER_ANGLE = 0;
 
+long delay_ratio = 1/3;
+
+const int WITHIN_RANGE = 1;
+const int OUT_OF_RANGE = 0;
+
+int train_status = OUT_OF_RANGE;
+int transit_start = 0;
+int transit_end = 0;
+
 int CarDistance;
 int TrainDistance;
 
@@ -93,9 +102,27 @@ void loop()
   TrainDistance = getTrainDistance();
 
   if (TrainDistance < 5) {
-    raise_rail_bars(rail_bar_1, rail_bar_2);
+    switch (train_status) {
+      case OUT_OF_RANGE:
+        train_status = WITHIN_RANGE;
+        transit_start = millis();
+        raise_rail_bars(rail_bar_1, rail_bar_2);
+        break;
+      case WITHIN_RANGE:
+        break;
+    }
   } else {
-    lower_rail_bars(rail_bar_1, rail_bar_2);
+    switch (train_status) {
+      case OUT_OF_RANGE:
+        if ((millis() - transit_end) > (transit_end - transit_start) * delay_ratio) {
+          lower_rail_bars(rail_bar_1, rail_bar_2);
+        }
+        break;
+      case WITHIN_RANGE:
+        transit_end = millis() - transit_start;
+        train_status = OUT_OF_RANGE;
+        break;
+    }
   }
 
   CarDistance = getCarDistance();
