@@ -17,6 +17,10 @@ int rail_bar_lower_angle = 0;
 int racker_raise_angle = 75;
 int racker_lower_angle = 0;
 
+const int BAR_LOWERED = 0;
+const int BAR_TRANSIT = 1;
+const int BAR_RAISED = 2;
+
 int CarDistance;
 int TrainDistance;
 
