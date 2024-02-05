@@ -2,20 +2,20 @@
 //
 #include <Servo.h>
 
-int CarTriggerPin = 13;
-int CarEchoPin = 12;
-int rack_3_pin = 9;
+const int CAR_TRIGGER_PIN = 13;
+const int CAR_ECHO_PIN = 12;
+const int RACK_3_PIN = 9;
 
-int TrainTriggerPin = 7;
-int TrainEchoPin = 8;
-int rail_bar_1_pin = 11;
-int rail_bar_2_pin = 10;
+const int TRAIN_TRIGGER_PIN = 7;
+const int TRAIN_ECHO_PIN = 8;
+const int RAIL_BAR_1_PIN = 11;
+const int RAIL_BAR_2_PIN = 10;
 
-int rail_bar_raise_angle = 90;
-int rail_bar_lower_angle = 0;
+const int RAIL_BAR_RAISE_ANGLE = 90;
+const int RAIL_BAR_LOWER_ANGLE = 0;
 
-int racker_raise_angle = 75;
-int racker_lower_angle = 0;
+const int RACKER_RAISE_ANGLE = 75;
+const int RACKER_LOWER_ANGLE = 0;
 
 int CarDistance;
 int TrainDistance;
@@ -40,7 +40,7 @@ long readUltrasonicDistance(int triggerPin, int echoPin)
 
 long getTrainDistance()
 {
-  long distance = 0.01723 * readUltrasonicDistance(TrainTriggerPin, TrainEchoPin);
+  long distance = 0.01723 * readUltrasonicDistance(TRAIN_TRIGGER_PIN, TRAIN_ECHO_PIN);
   Serial.print("Train: ");
   Serial.print(distance);
   Serial.print("; ");
@@ -49,7 +49,7 @@ long getTrainDistance()
 
 long getCarDistance()
 {
-  long distance = 0.01723 * readUltrasonicDistance(CarTriggerPin, CarEchoPin);
+  long distance = 0.01723 * readUltrasonicDistance(CAR_TRIGGER_PIN, CAR_ECHO_PIN);
   Serial.print("Car: ");
   Serial.print(distance);
   Serial.print("; ");
@@ -57,25 +57,25 @@ long getCarDistance()
 }
 
 void raise_rail_bars(Servo bar1, Servo bar2) {
-  bar1.write(rail_bar_raise_angle);
-  bar2.write(rail_bar_raise_angle);
+  bar1.write(RAIL_BAR_RAISE_ANGLE);
+  bar2.write(RAIL_BAR_RAISE_ANGLE);
 
   Serial.print("Rail bars raised; ");
 }
 
 void lower_rail_bars(Servo bar1, Servo bar2) {
-  bar1.write(rail_bar_lower_angle);
-  bar2.write(rail_bar_lower_angle);
+  bar1.write(RAIL_BAR_LOWER_ANGLE);
+  bar2.write(RAIL_BAR_LOWER_ANGLE);
 }
 
 void raise_racker(Servo racker) {
-  racker.write(racker_raise_angle);
+  racker.write(RACKER_RAISE_ANGLE);
 
   Serial.print("Racker raised; ");
 }
 
 void lower_racker(Servo racker) {
-  racker.write(racker_lower_angle);
+  racker.write(RACKER_LOWER_ANGLE);
 }
 
 void setup()
@@ -83,9 +83,9 @@ void setup()
   Serial.begin(9600);
   Serial.println("serial test 0021");
 
-  rail_bar_1.attach(rail_bar_1_pin, 500, 2500);
-  rail_bar_2.attach(rail_bar_2_pin, 500, 2500);
-  rack_3.attach(rack_3_pin, 500, 2500);
+  rail_bar_1.attach(RAIL_BAR_1_PIN, 500, 2500);
+  rail_bar_2.attach(RAIL_BAR_2_PIN, 500, 2500);
+  rack_3.attach(RACK_3_PIN, 500, 2500);
 }
 
 void loop()
