@@ -17,7 +17,7 @@ const int RAIL_BAR_LOWER_ANGLE = 0;
 const int RACKER_RAISE_ANGLE = 75;
 const int RACKER_LOWER_ANGLE = 0;
 
-long delay_ratio = 1/3;
+const long DELAY_RATIO = 1/3;
 
 const int WITHIN_RANGE = 1;
 const int OUT_OF_RANGE = 0;
@@ -114,7 +114,7 @@ void loop()
   } else {
     switch (train_status) {
       case OUT_OF_RANGE:
-        if ((millis() - transit_end) > (transit_end - transit_start) * delay_ratio) {
+        if ((millis() - transit_end) > (transit_end - transit_start) * DELAY_RATIO) {
           lower_rail_bars(rail_bar_1, rail_bar_2);
         }
         break;
